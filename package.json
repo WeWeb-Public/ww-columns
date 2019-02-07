@@ -1,0 +1,41 @@
+{
+    "name": "ww-columns",
+    "type": "wwObject",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "build": "webpack --config webpack.build.config.js -p --env=build",
+        "serve-manager": "webpack-dev-server --config webpack.manager.config.js -d --inline --env=dev --hot --https --disableHostCheck=true --client-log-level=error",
+        "serve-front": "webpack-dev-server --config webpack.front.config.js -d --inline --env=dev --hot --https --disableHostCheck=true --client-log-level=error",
+        "upload": "weweb-upload"
+    },
+    "dependencies": {
+        "vue": "^2.5.16"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^3.0.5",
+        "@vue/cli-plugin-eslint": "^3.0.5",
+        "@vue/cli-service": "^3.0.5",
+        "autoprefixer": "^9.4.3",
+        "babel-loader": "^7.1.4",
+        "babel-plugin-transform-async-to-generator": "^6.24.1",
+        "cache-loader": "^1.2.5",
+        "css-loader": "^0.28.11",
+        "node-sass": "^4.11.0",
+        "postcss": "^7.0.7",
+        "sass-loader": "^7.1.0",
+        "url-loader": "^1.1.2",
+        "vue-loader": "^15.2.2",
+        "vue-style-loader": "^4.1.0",
+        "vue-template-compiler": "^2.5.16",
+        "webpack": "^4.9.1",
+        "webpack-cli": "^2.1.4",
+        "webpack-dev-server": "^3.1.14",
+        "weweb-strip-block": "^0.0.2"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
+}

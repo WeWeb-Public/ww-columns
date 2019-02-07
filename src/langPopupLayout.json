@@ -1,0 +1,114 @@
+{
+    "mobile": {
+        "en_GB": "Mobile",
+        "fr_FR": "Mobile"
+    },
+    "tablet": {
+        "en_GB": "Tablet",
+        "fr_FR": "Tablette"
+    },
+    "laptop": {
+        "en_GB": "Laptop",
+        "fr_FR": "PC Portable"
+    },
+    "desktop": {
+        "en_GB": "Desktop",
+        "fr_FR": "Grand écran"
+    },
+    "columnsCount": {
+        "en_GB": "Columns count",
+        "fr_FR": "Nombre de colonnes"
+    },
+    "apply": {
+        "en_GB": "Set columns count",
+        "fr_FR": "Appliquer le nombre de colonnes"
+    },
+    "ignore": {
+        "en_GB": "Ignore config for this screen :",
+        "fr_FR": "Ignorer la config pour cet écran :"
+    },
+    "currentConfig": {
+        "en_GB": "This screen uses the config for :",
+        "fr_FR": "Cet écran utilise la configuration :"
+    },
+    "sizes": {
+        "en_GB": "Sizes",
+        "fr_FR": "Tailles"
+    },
+    "borders": {
+        "en_GB": "Borders",
+        "fr_FR": "Bordures"
+    },
+    "shadows": {
+        "en_GB": "Shadows",
+        "fr_FR": "Ombres"
+    },
+    "distribute": {
+        "en_GB": "Distribute",
+        "fr_FR": "Répartir"
+    },
+    "distributeWithSpaces": {
+        "en_GB": "Distribute with spaces",
+        "fr_FR": "Répartir avec espaces"
+    },
+    "height": {
+        "en_GB": "Height",
+        "fr_FR": "Hauteur"
+    },
+    "column": {
+        "en_GB": "Column",
+        "fr_FR": "Colonne"
+    },
+    "hide": {
+        "en_GB": "Hide",
+        "fr_FR": "Cacher"
+    },
+    "offset": {
+        "en_GB": "Offset",
+        "fr_FR": "Marge"
+    },
+    "width": {
+        "en_GB": "Width",
+        "fr_FR": "Largeur"
+    },
+    "borderTop": {
+        "en_GB": "Top",
+        "fr_FR": "Haut"
+    },
+    "borderLeft": {
+        "en_GB": "Left",
+        "fr_FR": "Gauche"
+    },
+    "borderBottom": {
+        "en_GB": "Bottom",
+        "fr_FR": "Bas"
+    },
+    "borderRight": {
+        "en_GB": "Right",
+        "fr_FR": "Droite"
+    },
+    "radiusTopLeft": {
+        "en_GB": "Top/Left",
+        "fr_FR": "Haut/Gauche"
+    },
+    "radiusTopRight": {
+        "en_GB": "Top/Right",
+        "fr_FR": "Haut/Droite"
+    },
+    "radiusBottomRight": {
+        "en_GB": "Bottom/Right",
+        "fr_FR": "Bas/Droite"
+    },
+    "radiusBottomLeft": {
+        "en_GB": "Bottom/Left",
+        "fr_FR": "Bas/Gauche"
+    },
+    "blur": {
+        "en_GB": "Blur",
+        "fr_FR": "Flou"
+    },
+    "spread": {
+        "en_GB": "Spread",
+        "fr_FR": "Propagation"
+    }
+}
