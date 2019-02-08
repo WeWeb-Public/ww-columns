@@ -149,7 +149,7 @@
 import langPopupLayout from './langPopupLayout.json';
 
 export default {
-    name: "wwRowPopupLayout",
+    name: "wwColumnsPopupLayout",
     props: {
         options: Object,
     },
@@ -605,7 +605,7 @@ export default {
             config.md.cols = config.md.ignore ? null : config.md.cols;
             config.lg.cols = config.lg.ignore ? null : config.lg.cols;
 
-            this.options.result.wwRowConfig = config;
+            this.options.result.wwColumnsConfig = config;
         }
     },
     created() {

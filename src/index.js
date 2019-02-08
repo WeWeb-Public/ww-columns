@@ -1,4 +1,4 @@
-import wwObject from './wwObjectRow.vue'
+import wwObject from './wwObjectColumns.vue'
 
 const name = "ww-columns";
 
