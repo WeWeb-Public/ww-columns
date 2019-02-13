@@ -44,7 +44,7 @@ wwLib.wwPopups.addStory('WW_COLUMNS_POPUP_LAYOUT', {
 
 
 export default {
-    name: "ww-columns",
+    name: "__COMPONENT_NAME__",
     props: {
         wwObjectCtrl: Object,
         wwAttrs: Object
@@ -102,7 +102,7 @@ export default {
         columnHeight() {
             let height = '60px';
 
-            let defaultHeight = '60px'
+            let defaultHeight = '60px';
 
             if (this.wwAttrs && this.wwAttrs.wwColumnsDefaultHeight) {
                 height = this.wwAttrs.wwColumnsDefaultHeight;
@@ -116,17 +116,24 @@ export default {
                 wwObjectHeight = 0;
             }
 
+            const wwObjectUnit = this.wwObject.content.data.config[this.getScreenSize()].unit || '%';
+
             height = wwObjectHeight || height;
 
             if (height == 'auto' || height == 0 || height == '0') {
                 return defaultHeight;
             }
 
-            if (window.CSS && window.CSS.supports && window.CSS.supports('--fake-var', 0)) {
-                return 'calc(var(--vh, 1vh) * ' + height + ')'
+            if (wwObjectUnit == '%') {
+                if (window.CSS && window.CSS.supports && window.CSS.supports('--fake-var', 0)) {
+                    return 'calc(var(--vh, 1vh) * ' + height + ')'
+                }
+                else {
+                    return height + 'vh'
+                }
             }
             else {
-                return height + 'vh'
+                return height + wwObjectUnit;
             }
         }
     },

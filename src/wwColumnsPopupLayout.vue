@@ -57,7 +57,8 @@
                     <wwManagerButton class="button" color="blue" @click="resizeColumns(true)">{{wwLang.getText('distributeWithSpaces')}}</wwManagerButton>
                 </div>
                 <div class="columns-count-container">
-                    <wwManagerInput color="green" :label="wwLang.getText('height') +' - %'" v-model="config[screen].height"></wwManagerInput>
+                    <wwManagerInput color="green" :label="wwLang.getText('height')" v-model="config[screen].height"></wwManagerInput>&nbsp;
+                    <wwManagerSelect class="select" v-model="config[screen].unit" :options="unitOptions" @change="setUnit(config[screen], $event)"></wwManagerSelect>
                 </div>
                 <div class="columns">
                     <div class="column" v-for="(column, index) in screenCols" :key="index" :class="getColor(index)">
@@ -228,6 +229,27 @@ export default {
             /*=============================================m_ÔÔ_m=============================================\
               OPTIONS
             \================================================================================================*/
+            unitOptions: {
+                type: 'text',
+                values: [
+                    {
+                        value: "%",
+                        default: true,
+                        text: {
+                            en_GB: '% - Percent (screen)',
+                            fr_FR: '% - Poucentage (écran)'
+                        }
+                    },
+                    {
+                        value: "px",
+                        text: {
+                            en_GB: 'px - Pixels',
+                            fr_FR: 'px - Pixels'
+                        }
+                    }
+                ]
+            },
+
             alignOptions: {
                 type: 'text',
                 values: [
@@ -446,6 +468,7 @@ export default {
                 }
 
                 this.config[screen].height = Math.max(this.config[screen].height || 0, 0);
+                this.config[screen].unit = this.config[screen].unit || '%';
 
                 let cols = [];
                 for (let i = 0; i < this.config.count; i++) {
@@ -572,6 +595,11 @@ export default {
             else if (style == 'none') {
                 column.borders[index].width = 0;
             }
+        },
+
+        setUnit(config, value) {
+            config.unit = value;
+            this.$forceUpdate();
         },
 
         /*=============================================m_ÔÔ_m=============================================\
