@@ -1,114 +1,122 @@
 {
     "mobile": {
-        "en_GB": "Mobile",
-        "fr_FR": "Mobile"
+        "en": "Mobile",
+        "fr": "Mobile"
     },
     "tablet": {
-        "en_GB": "Tablet",
-        "fr_FR": "Tablette"
+        "en": "Tablet",
+        "fr": "Tablette"
     },
     "laptop": {
-        "en_GB": "Laptop",
-        "fr_FR": "PC Portable"
+        "en": "Laptop",
+        "fr": "PC Portable"
     },
     "desktop": {
-        "en_GB": "Desktop",
-        "fr_FR": "Grand écran"
+        "en": "Desktop",
+        "fr": "Grand écran"
     },
     "columnsCount": {
-        "en_GB": "Columns count",
-        "fr_FR": "Nombre de colonnes"
+        "en": "Columns count",
+        "fr": "Nombre de colonnes"
     },
     "apply": {
-        "en_GB": "Set columns count",
-        "fr_FR": "Appliquer le nombre de colonnes"
+        "en": "Set columns count",
+        "fr": "Appliquer le nombre de colonnes"
     },
     "ignore": {
-        "en_GB": "Ignore config for this screen :",
-        "fr_FR": "Ignorer la config pour cet écran :"
+        "en": "Ignore config for this screen :",
+        "fr": "Ignorer la config pour cet écran :"
+    },
+    "wrap": {
+        "en": "Wrap",
+        "fr": "Retour"
+    },
+    "nowrap": {
+        "en": "No wrap",
+        "fr": "Pas de retour"
     },
     "currentConfig": {
-        "en_GB": "This screen uses the config for :",
-        "fr_FR": "Cet écran utilise la configuration :"
+        "en": "This screen uses the config for :",
+        "fr": "Cet écran utilise la configuration :"
     },
     "sizes": {
-        "en_GB": "Sizes",
-        "fr_FR": "Tailles"
+        "en": "Sizes",
+        "fr": "Tailles"
     },
     "borders": {
-        "en_GB": "Borders",
-        "fr_FR": "Bordures"
+        "en": "Borders",
+        "fr": "Bordures"
     },
     "shadows": {
-        "en_GB": "Shadows",
-        "fr_FR": "Ombres"
+        "en": "Shadows",
+        "fr": "Ombres"
     },
     "distribute": {
-        "en_GB": "Distribute",
-        "fr_FR": "Répartir"
+        "en": "Distribute",
+        "fr": "Répartir"
     },
     "distributeWithSpaces": {
-        "en_GB": "Distribute with spaces",
-        "fr_FR": "Répartir avec espaces"
+        "en": "Distribute with spaces",
+        "fr": "Répartir avec espaces"
     },
     "height": {
-        "en_GB": "Height",
-        "fr_FR": "Hauteur"
+        "en": "Height",
+        "fr": "Hauteur"
     },
     "column": {
-        "en_GB": "Column",
-        "fr_FR": "Colonne"
+        "en": "Column",
+        "fr": "Colonne"
     },
     "hide": {
-        "en_GB": "Hide",
-        "fr_FR": "Cacher"
+        "en": "Hide",
+        "fr": "Cacher"
     },
     "offset": {
-        "en_GB": "Offset",
-        "fr_FR": "Marge"
+        "en": "Offset",
+        "fr": "Marge"
     },
     "width": {
-        "en_GB": "Width",
-        "fr_FR": "Largeur"
+        "en": "Width",
+        "fr": "Largeur"
     },
     "borderTop": {
-        "en_GB": "Top",
-        "fr_FR": "Haut"
+        "en": "Top",
+        "fr": "Haut"
     },
     "borderLeft": {
-        "en_GB": "Left",
-        "fr_FR": "Gauche"
+        "en": "Left",
+        "fr": "Gauche"
     },
     "borderBottom": {
-        "en_GB": "Bottom",
-        "fr_FR": "Bas"
+        "en": "Bottom",
+        "fr": "Bas"
     },
     "borderRight": {
-        "en_GB": "Right",
-        "fr_FR": "Droite"
+        "en": "Right",
+        "fr": "Droite"
     },
     "radiusTopLeft": {
-        "en_GB": "Top/Left",
-        "fr_FR": "Haut/Gauche"
+        "en": "Top/Left",
+        "fr": "Haut/Gauche"
     },
     "radiusTopRight": {
-        "en_GB": "Top/Right",
-        "fr_FR": "Haut/Droite"
+        "en": "Top/Right",
+        "fr": "Haut/Droite"
     },
     "radiusBottomRight": {
-        "en_GB": "Bottom/Right",
-        "fr_FR": "Bas/Droite"
+        "en": "Bottom/Right",
+        "fr": "Bas/Droite"
     },
     "radiusBottomLeft": {
-        "en_GB": "Bottom/Left",
-        "fr_FR": "Bas/Gauche"
+        "en": "Bottom/Left",
+        "fr": "Bas/Gauche"
     },
     "blur": {
-        "en_GB": "Blur",
-        "fr_FR": "Flou"
+        "en": "Blur",
+        "fr": "Flou"
     },
     "spread": {
-        "en_GB": "Spread",
-        "fr_FR": "Propagation"
+        "en": "Spread",
+        "fr": "Propagation"
     }
 }

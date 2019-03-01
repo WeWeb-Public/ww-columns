@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="preview-container">
-            <div class="preview">
+            <div class="preview" :style="wrap()">
                 <div class="column" v-for="(column, index) in screenCols" :key="index" :style="getStyle(column)" :class="getColor(index)" v-show="!column.hide">
                     <div class="info">
                         <div class="index">{{ index + 1 }}</div>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="background"></div>
                     <!-- <div class="background" :style="getBackgroundStyle(column)"></div> -->
-                    <!-- <div class="borders" :style="getBorderStyle(column)"></div> -->
+                    <div class="borders" :style="getBorderStyle(column)"></div>
                     <div class="offset" :style="{'width': getOffsetWidth(column) + 'px'}">
                         <div class="percent" v-if="parseInt(column.offset)">{{ column.offset + '%'}}</div>
                     </div>
@@ -42,13 +42,11 @@
             {{wwLang.getText('currentConfig')}}&nbsp;
             <b>{{wwLang.getText(screenNames[activeScreen])}}</b>
         </div>
-        <!--
         <div class="config-tabs" v-if="!config[screen].ignore">
             <div class="tab" :class="{'active': mode == 'size'}" @click="mode = 'size'">{{wwLang.getText('sizes')}}</div>
             <div class="tab" :class="{'active': mode == 'border'}" @click="mode = 'border'">{{wwLang.getText('borders')}}</div>
-            <div class="tab" :class="{'active': mode == 'shadow'}" @click="mode = 'shadow'">{{wwLang.getText('shadows')}}</div>
+            <!-- <div class="tab" :class="{'active': mode == 'shadow'}" @click="mode = 'shadow'">{{wwLang.getText('shadows')}}</div> -->
         </div>
-        -->
         <div class="config-container" v-if="!config[screen].ignore">
             <!-- SIZE -->
             <div class="config" v-if="mode == 'size'">
@@ -58,7 +56,8 @@
                 </div>
                 <div class="columns-count-container">
                     <wwManagerInput color="green" :label="wwLang.getText('height')" v-model="config[screen].height"></wwManagerInput>&nbsp;
-                    <wwManagerSelect class="select" v-model="config[screen].unit" :options="unitOptions" @change="setUnit(config[screen], $event)"></wwManagerSelect>
+                    <wwManagerSelect class="select" v-model="config[screen].unit" :options="unitOptions" @change="setUnit(config[screen], $event)"></wwManagerSelect>&nbsp;&nbsp;&nbsp;
+                    <wwManagerSelect class="select" v-model="config[screen].nowrap" :options="wrapOptions" @change="setWrap(config[screen], $event)"></wwManagerSelect>
                 </div>
                 <div class="columns">
                     <div class="column" v-for="(column, index) in screenCols" :key="index" :class="getColor(index)">
@@ -85,7 +84,6 @@
             </div>
 
             <!-- BORDER -->
-            <!--
             <div class="config" v-if="mode == 'border'">
                 <div class="columns">
                     <div class="column" v-for="(column, index) in screenCols" :key="index" :class="getColor(index)">
@@ -102,21 +100,19 @@
                         </div>
                         <div class="content-border">
                             <div class="border" v-for="i in 4" :key="i">
-                                <wwManagerInput :color="getColor(index)" outline="true" :label="wwLang.getText(borderNames[i-1])" v-model="column.borders[i - 1].width" @change="setBorderStyle(column, i - 1, $event)"></wwManagerInput>
+                                <wwManagerInput :color="getColor(index)" :label="wwLang.getText(borderNames[i-1])" v-model="column.borders[i - 1].width" @change="setBorderStyle(column, i - 1, $event)"></wwManagerInput>
                                 <wwManagerSelect class="select" v-model="column.borders[i - 1].style" :options="borderStyleOptions" @change="setBorderWidth(column, i - 1, $event)"></wwManagerSelect>
                                 <wwManagerColorSelect v-model="column.borders[i - 1].color"></wwManagerColorSelect>
                             </div>
-                            <div class="radius">
+                            <!-- <div class="radius">
                                 <wwManagerInput v-for="i in 4" :key="i" :color="getColor(index)" :label="wwLang.getText(radiusNames[i-1])" v-model="column.radius[i - 1]" @change="$forceUpdate()"></wwManagerInput>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
             </div>
-            -->
             <!-- SHADOW -->
-            <!--
-            <div class="config" v-if="mode == 'shadow'">
+            <!-- <div class="config" v-if="mode == 'shadow'">
                 <div class="columns">
                     <div class="column" v-for="(column, index) in screenCols" :key="index" :class="getColor(index)">
                         <div class="copy-paste-container">
@@ -139,8 +135,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            -->
+            </div>-->
         </div>
     </div>
 </template>
@@ -236,15 +231,36 @@ export default {
                         value: "%",
                         default: true,
                         text: {
-                            en_GB: '% - Percent (screen)',
-                            fr_FR: '% - Poucentage (écran)'
+                            en: '% - Percent (screen)',
+                            fr: '% - Poucentage (écran)'
                         }
                     },
                     {
                         value: "px",
                         text: {
-                            en_GB: 'px - Pixels',
-                            fr_FR: 'px - Pixels'
+                            en: 'px - Pixels',
+                            fr: 'px - Pixels'
+                        }
+                    }
+                ]
+            },
+
+            wrapOptions: {
+                type: 'text',
+                values: [
+                    {
+                        value: false,
+                        default: true,
+                        text: {
+                            en: 'Wrap columns',
+                            fr: 'Superposer les colonnes'
+                        }
+                    },
+                    {
+                        value: true,
+                        text: {
+                            en: 'Do not wrap columns',
+                            fr: 'Ne pas superposer les colonnes'
                         }
                     }
                 ]
@@ -257,29 +273,29 @@ export default {
                         value: "0",
                         default: true,
                         text: {
-                            en_GB: 'Default',
-                            fr_FR: 'Défaut'
+                            en: 'Default',
+                            fr: 'Défaut'
                         }
                     },
                     {
                         value: "1",
                         text: {
-                            en_GB: 'Top',
-                            fr_FR: 'Haut'
+                            en: 'Top',
+                            fr: 'Haut'
                         }
                     },
                     {
                         value: "2",
                         text: {
-                            en_GB: 'Center',
-                            fr_FR: 'Milieu'
+                            en: 'Center',
+                            fr: 'Milieu'
                         }
                     },
                     {
                         value: "3",
                         text: {
-                            en_GB: 'Bottom',
-                            fr_FR: 'Bas'
+                            en: 'Bottom',
+                            fr: 'Bas'
                         }
                     },
                 ]
@@ -292,36 +308,36 @@ export default {
                         value: 'none',
                         default: true,
                         text: {
-                            en_GB: 'None',
-                            fr_FR: 'Aucune'
+                            en: 'None',
+                            fr: 'Aucune'
                         }
                     },
                     {
                         value: 'solid',
                         text: {
-                            en_GB: 'Solid',
-                            fr_FR: 'Continue'
+                            en: 'Solid',
+                            fr: 'Continue'
                         }
                     },
                     {
                         value: 'dotted',
                         text: {
-                            en_GB: 'Dotted',
-                            fr_FR: 'Pointillés'
+                            en: 'Dotted',
+                            fr: 'Pointillés'
                         }
                     },
                     {
                         value: 'dashed',
                         text: {
-                            en_GB: 'Dashed',
-                            fr_FR: 'Tirets'
+                            en: 'Dashed',
+                            fr: 'Tirets'
                         }
                     },
                     {
                         value: 'double',
                         text: {
-                            en_GB: 'Double',
-                            fr_FR: 'Double'
+                            en: 'Double',
+                            fr: 'Double'
                         }
                     },
                 ]
@@ -396,7 +412,20 @@ export default {
             return style;
         },
 
-        /*
+        wrap() {
+            let screen = this.screen;
+
+            while (this.config[screen].ignore && this.getIndexFromScreen(screen) > 0) {
+                screen = this.getScreenFromIndex(this.getIndexFromScreen(screen) - 1);
+            }
+
+            this.activeScreen = screen;
+
+            return {
+                flexWrap: this.config[screen].nowrap ? 'nowrap' : 'wrap'
+            }
+        },
+
         getBorderStyle(column) {
             let style = {};
 
@@ -418,34 +447,33 @@ export default {
                 style.borderLeftColor = column.borders[3].color;
             }
 
-            if (column.radius && column.radius.length == 4) {
-                style.borderTopLeftRadius = column.radius[0] + 'px';
-                style.borderTopRightRadius = column.radius[1] + 'px';
-                style.borderBottomRightRadius = column.radius[2] + 'px';
-                style.borderBottomLeftRadius = column.radius[3] + 'px';
-            }
+            // if (column.radius && column.radius.length == 4) {
+            //     style.borderTopLeftRadius = column.radius[0] + 'px';
+            //     style.borderTopRightRadius = column.radius[1] + 'px';
+            //     style.borderBottomRightRadius = column.radius[2] + 'px';
+            //     style.borderBottomLeftRadius = column.radius[3] + 'px';
+            // }
 
             return style;
         },
 
-        getBackgroundStyle(column) {
-            let style = {}
+        // getBackgroundStyle(column) {
+        //     let style = {}
 
-            if (column.radius && column.radius.length == 4) {
-                style.borderTopLeftRadius = column.radius[0] + 'px';
-                style.borderTopRightRadius = column.radius[1] + 'px';
-                style.borderBottomRightRadius = column.radius[2] + 'px';
-                style.borderBottomLeftRadius = column.radius[3] + 'px';
-            }
+        //     if (column.radius && column.radius.length == 4) {
+        //         style.borderTopLeftRadius = column.radius[0] + 'px';
+        //         style.borderTopRightRadius = column.radius[1] + 'px';
+        //         style.borderBottomRightRadius = column.radius[2] + 'px';
+        //         style.borderBottomLeftRadius = column.radius[3] + 'px';
+        //     }
 
-            if (column.shadow.x || column.shadow.y || column.shadow.blur || column.shadow.spread) {
-                style.boxShadow = (column.shadow.x || 0) + 'px ' + (column.shadow.y || 0) + 'px ' +
-                    (column.shadow.blur || 0) + 'px ' + (column.shadow.spread || 0) + 'px ' + (column.shadow.color || '#000000');
-            }
+        //     if (column.shadow.x || column.shadow.y || column.shadow.blur || column.shadow.spread) {
+        //         style.boxShadow = (column.shadow.x || 0) + 'px ' + (column.shadow.y || 0) + 'px ' +
+        //             (column.shadow.blur || 0) + 'px ' + (column.shadow.spread || 0) + 'px ' + (column.shadow.color || '#000000');
+        //     }
 
-            return style;
-        },
-        */
+        //     return style;
+        // },
 
         /*=============================================m_ÔÔ_m=============================================\
           CONFIG
@@ -459,6 +487,10 @@ export default {
                     this.config[screen] = {
                         cols: []
                     };
+                }
+
+                if (screen == 'xs') {
+                    this.config[screen].ignore = false;
                 }
 
                 if (this.config[screen][0]) {
@@ -478,9 +510,9 @@ export default {
                         confCols[i].align = confCols[i].align || "1";
                         confCols[i].width = confCols[i].width || 100 / this.config.count;
                         confCols[i].offset = confCols[i].offset || 0;
-                        // confCols[i].borders = confCols[i].borders || JSON.parse(JSON.stringify(this.defaultBorders));
-                        // confCols[i].radius = confCols[i].radius || JSON.parse(JSON.stringify(this.defaultRadius));
-                        // confCols[i].shadow = confCols[i].shadow || JSON.parse(JSON.stringify(this.defaultShadow));
+                        confCols[i].borders = (confCols[i].borders && confCols[i].borders.length == 4) ? confCols[i].borders : JSON.parse(JSON.stringify(this.defaultBorders));
+                        //confCols[i].radius = confCols[i].radius || JSON.parse(JSON.stringify(this.defaultRadius));
+                        //confCols[i].shadow = confCols[i].shadow || JSON.parse(JSON.stringify(this.defaultShadow));
 
                         cols.push(confCols[i]);
                     }
@@ -489,16 +521,16 @@ export default {
                             align: "1",
                             width: 100 / this.config.count,
                             offset: 0,
-                            // borders: JSON.parse(JSON.stringify(this.defaultBorders)),
-                            // radius: JSON.parse(JSON.stringify(this.defaultRadius)),
-                            // shadow: JSON.parse(JSON.stringify(this.defaultShadow))
+                            borders: JSON.parse(JSON.stringify(this.defaultBorders)),
+                            //radius: JSON.parse(JSON.stringify(this.defaultRadius)),
+                            //shadow: JSON.parse(JSON.stringify(this.defaultShadow))
                         })
                     }
                 }
 
                 this.config[screen].cols = cols;
             }
-            console.log(this.config)
+            console.log(this.config);
         },
 
         copyConfig(type, index) {
@@ -512,7 +544,7 @@ export default {
                     break;
                 case 'border':
                     this.copiedColumnConfig.border = JSON.parse(JSON.stringify(this.config[this.screen].cols[index].borders));
-                    this.copiedColumnConfig.radius = JSON.parse(JSON.stringify(this.config[this.screen].cols[index].radius));
+                    //this.copiedColumnConfig.radius = JSON.parse(JSON.stringify(this.config[this.screen].cols[index].radius));
                     break;
                 case 'shadow':
                     this.copiedColumnConfig.shadow = JSON.parse(JSON.stringify(this.config[this.screen].cols[index].shadow));
@@ -534,7 +566,7 @@ export default {
                     break;
                 case 'border':
                     Vue.set(this.config[this.screen].cols[index], 'borders', JSON.parse(JSON.stringify(this.copiedColumnConfig.border)));
-                    Vue.set(this.config[this.screen].cols[index], 'radius', JSON.parse(JSON.stringify(this.copiedColumnConfig.radius)));
+                    //Vue.set(this.config[this.screen].cols[index], 'radius', JSON.parse(JSON.stringify(this.copiedColumnConfig.radius)));
                     break;
                 case 'shadow':
                     Vue.set(this.config[this.screen].cols[index], 'shadow', JSON.parse(JSON.stringify(this.copiedColumnConfig.shadow)));
@@ -601,6 +633,13 @@ export default {
             config.unit = value;
             this.$forceUpdate();
         },
+
+        setWrap(config, value) {
+            config.nowrap = value;
+            this.$forceUpdate();
+        },
+
+
 
         /*=============================================m_ÔÔ_m=============================================\
           UTILS
@@ -763,7 +802,6 @@ $ww-font: "Monserrat", sans-serif;
         padding: 0 30px;
         .preview {
             display: flex;
-            flex-wrap: wrap;
             min-height: 30px;
             background-image: linear-gradient(
                 135deg,

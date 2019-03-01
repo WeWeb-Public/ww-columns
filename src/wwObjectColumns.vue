@@ -1,5 +1,5 @@
 <template>
-    <div class="ww-columns">
+    <div class="ww-columns" :style="wrap">
         <!-- wwManager:start -->
         <div class="ww-column-tab">
             <span class="wwi wwi-align-right"></span>
@@ -11,7 +11,7 @@
                 <div class="offset" :style="getOffsetStyle(column)"></div>
             </div>
             <!-- wwManager:end -->
-            <wwObject class="ww-column-bg" :ww-object="getColData(index).background" ww-category="background"></wwObject>
+            <wwObject class="ww-column-bg" :ww-object="getColData(index).background" ww-category="background" :style="getBordersStyle(column)"></wwObject>
             <wwLayoutColumn tag="div" ww-default="ww-image" :ww-list="getColData(index).wwObjects" class="ww-column-container" @ww-add="wwAdd(getColData(index).wwObjects, $event)" @ww-remove="wwRemove(getColData(index).wwObjects, $event)">
                 <wwObject v-for="wwObj in getColData(index).wwObjects" :key="wwObj.uniqueId" :ww-object="wwObj"></wwObject>
             </wwLayoutColumn>
@@ -26,15 +26,15 @@ import wwColumnsPopupLayout from './wwColumnsPopupLayout.vue';
 wwLib.wwPopups.addPopup('wwColumnsPopupLayout', wwColumnsPopupLayout);
 wwLib.wwPopups.addStory('WW_COLUMNS_POPUP_LAYOUT', {
     title: {
-        en_GB: 'Columns',
-        fr_FR: 'Colonnes'
+        en: 'Columns',
+        fr: 'Colonnes'
     },
     type: 'wwColumnsPopupLayout',
     buttons: {
         FINISH: {
             text: {
-                en_GB: 'Finish',
-                fr_FR: 'Terminer'
+                en: 'Finish',
+                fr: 'Terminer'
             },
             next: false
         }
@@ -135,6 +135,11 @@ export default {
             else {
                 return height + wwObjectUnit;
             }
+        },
+        wrap() {
+            return {
+                flexWrap: this.wwObject.content.data.config[this.getScreenSize()].nowrap ? 'nowrap' : 'wrap'
+            }
         }
     },
     watch: {
@@ -165,15 +170,15 @@ export default {
             this.setScreenSize();
         },
 
-        correctConfigs() {
-            let config = this.wwObject.content.data.config;
+        correctConfigs(newConfig) {
+            let config = newConfig || this.wwObject.content.data.config || {};
             config.count = config.count || 1;
             config.height = config.height || null;
 
             for (let screen of this.screens) {
                 if (!config[screen]) {
                     config[screen] = {
-                        ignore: true,
+                        ignore: screen != 'xs',
                         cols: []
                     };
                 }
@@ -193,7 +198,7 @@ export default {
                             confCols[i].align = confCols[i].align || "1";
                             confCols[i].width = confCols[i].width || 100 / config.count;
                             confCols[i].offset = confCols[i].offset || 0;
-                            // confCols[i].borders = confCols[i].borders || JSON.parse(JSON.stringify(this.defaultBorders));
+                            confCols[i].borders = confCols[i].borders || JSON.parse(JSON.stringify(this.defaultBorders));
                             // confCols[i].radius = confCols[i].radius || JSON.parse(JSON.stringify(this.defaultRadius));
                             // confCols[i].shadow = confCols[i].shadow || JSON.parse(JSON.stringify(this.defaultShadow));
 
@@ -204,7 +209,7 @@ export default {
                                 align: "1",
                                 width: 100 / config.count,
                                 offset: 0,
-                                // borders: JSON.parse(JSON.stringify(this.defaultBorders)),
+                                borders: JSON.parse(JSON.stringify(this.defaultBorders)),
                                 // radius: JSON.parse(JSON.stringify(this.defaultRadius)),
                                 // shadow: JSON.parse(JSON.stringify(this.defaultShadow))
                             })
@@ -233,11 +238,13 @@ export default {
             }
             this.wwObject.content.data.columns = colData;
 
+            this.wwObject.content.data.config = config || {};
+
             this.wwObjectCtrl.update(this.wwObject);
         },
 
         getColData(index) {
-            return this.wwObject.content.data.columns[index];
+            return this.wwObject.content.data.columns[index] || {};
         },
 
         wwAdd(list, options) {
@@ -257,7 +264,31 @@ export default {
                 flexBasis: (column.width || 0) + '%',
                 alignItems: this.aligns[column.align || 0],
                 display: column.hide ? 'none' : 'flex',
-                minHeight: this.columnHeight
+                minHeight: this.columnHeight,
+            }
+
+            return style;
+        },
+
+        getBordersStyle(column) {
+
+            let style = {};
+            if (column.borders && column.borders.length == 4) {
+                style.borderTopWidth = column.borders[0].width + 'px';
+                style.borderTopStyle = column.borders[0].style;
+                style.borderTopColor = column.borders[0].color;
+
+                style.borderRightWidth = column.borders[1].width + 'px';
+                style.borderRightStyle = column.borders[1].style;
+                style.borderRightColor = column.borders[1].color;
+
+                style.borderBottomWidth = column.borders[2].width + 'px';
+                style.borderBottomStyle = column.borders[2].style;
+                style.borderBottomColor = column.borders[2].color;
+
+                style.borderLeftWidth = column.borders[3].width + 'px';
+                style.borderLeftStyle = column.borders[3].style;
+                style.borderLeftColor = column.borders[3].color;
             }
             return style;
         },
@@ -299,7 +330,7 @@ export default {
                 const result = await wwLib.wwPopups.open(options)
 
                 if (result.wwColumnsConfig) {
-                    this.wwObject.content.data.config = result.wwColumnsConfig;
+                    this.correctConfigs(result.wwColumnsConfig);
                     this.wwObjectCtrl.update(this.wwObject);
                 }
             } catch (error) {
@@ -315,16 +346,16 @@ export default {
             let editList = {
                 LAYOUT: {
                     separator: {
-                        en_GB: 'Configuration',
-                        fr_FR: 'Configuration'
+                        en: 'Configuration',
+                        fr: 'Configuration'
                     },
                     title: {
-                        en_GB: 'Layout',
-                        fr_FR: 'Disposition'
+                        en: 'Layout',
+                        fr: 'Disposition'
                     },
                     desc: {
-                        en_GB: 'Set columns count, sizes, ...',
-                        fr_FR: 'Changer le nombre de colonnes, leurs tailles, ...'
+                        en: 'Set columns count, sizes, ...',
+                        fr: 'Changer le nombre de colonnes, leurs tailles, ...'
                     },
                     icon: 'wwi wwi-config',
                     shortcut: 'c',
@@ -334,8 +365,8 @@ export default {
 
             wwLib.wwPopups.addStory('WWCOLUMNS_EDIT', {
                 title: {
-                    en_GB: 'Edit Columns',
-                    fr_FR: 'Editer les colonnes'
+                    en: 'Edit Columns',
+                    fr: 'Editer les colonnes'
                 },
                 type: 'wwPopupEditWwObject',
                 buttons: null,
@@ -358,7 +389,7 @@ export default {
                   STYLE
                 \================================================================================================*/
                 if (typeof (result.wwColumnsConfig) != 'undefined') {
-                    this.wwObject.content.data.config = result.wwColumnsConfig;
+                    this.correctConfigs(result.wwColumnsConfig);
                 }
 
                 this.wwObjectCtrl.update(this.wwObject);
@@ -389,7 +420,6 @@ export default {
 <style scoped lang="scss">
 .ww-columns {
     display: flex;
-    flex-wrap: wrap;
     position: relative;
 }
 

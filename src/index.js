@@ -67,8 +67,8 @@ const addComponent = function () {
                             if: 'wwLayout',
                             name: 'ADD_BEFORE',
                             text: {
-                                en_GB: 'Before',
-                                fr_FR: 'Avant'
+                                en: 'Before',
+                                fr: 'Avant'
                             },
                             icon: 'wwi wwi-add',
                             action: 'wwLayout:addBefore'
@@ -77,8 +77,8 @@ const addComponent = function () {
                             if: 'wwLayout',
                             name: 'ADD_AFTER',
                             text: {
-                                en_GB: 'After',
-                                fr_FR: 'Après'
+                                en: 'After',
+                                fr: 'Après'
                             },
                             icon: 'wwi wwi-add',
                             action: 'wwLayout:addAfter'
@@ -87,8 +87,8 @@ const addComponent = function () {
                         {
                             name: 'LAYOUT',
                             text: {
-                                en_GB: 'Columns',
-                                fr_FR: 'Colonnes'
+                                en: 'Columns',
+                                fr: 'Colonnes'
                             },
                             icon: 'wwi wwi-edit-margin',
                             action: 'editColumns'
@@ -97,8 +97,8 @@ const addComponent = function () {
                         {
                             name: 'OPTIONS',
                             text: {
-                                en_GB: 'Options...',
-                                fr_FR: 'Options...'
+                                en: 'Options...',
+                                fr: 'Options...'
                             },
                             icon: 'wwi wwi-edit-other',
                             action: 'edit'
