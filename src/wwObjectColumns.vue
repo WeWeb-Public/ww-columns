@@ -11,9 +11,9 @@
                 <div class="offset" :style="getOffsetStyle(column)"></div>
             </div>
             <!-- wwManager:end -->
-            <wwObject class="ww-column-bg" :ww-object="getColData(index).background" ww-category="background" :style="getBordersStyle(column)"></wwObject>
+            <wwObject class="ww-column-bg" :ww-object="getColData(index).background" ww-category="background" ww-inside-ww-object="ww-columns" :style="getBordersStyle(column)"></wwObject>
             <wwLayoutColumn tag="div" ww-default="ww-image" :ww-list="getColData(index).wwObjects" class="ww-column-container" @ww-add="wwAdd(getColData(index).wwObjects, $event)" @ww-remove="wwRemove(getColData(index).wwObjects, $event)">
-                <wwObject v-for="wwObj in getColData(index).wwObjects" :key="wwObj.uniqueId" :ww-object="wwObj"></wwObject>
+                <wwObject v-for="wwObj in getColData(index).wwObjects" :key="wwObj.uniqueId" :ww-object="wwObj" ww-inside-ww-object="ww-columns"></wwObject>
             </wwLayoutColumn>
         </div>
     </div>
@@ -266,6 +266,8 @@ export default {
                 display: column.hide ? 'none' : 'flex',
                 minHeight: this.columnHeight,
             }
+
+
 
             return style;
         },

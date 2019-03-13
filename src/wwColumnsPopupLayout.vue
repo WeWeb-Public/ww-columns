@@ -7,15 +7,19 @@
         <div class="screen-selector-container" :class="screen">
             <div class="screen xs" :class="{'active': screen == 'xs'}" @click="screen = 'xs'">
                 <div class="wwi wwi-mobile"></div>
+                <div class="name">{{wwLang.getText('mobile')}}</div>
             </div>
             <div class="screen sm" :class="{'active': screen == 'sm'}" @click="screen = 'sm'">
                 <div class="wwi wwi-tablet"></div>
+                <div class="name">{{wwLang.getText('tablet')}}</div>
             </div>
             <div class="screen md" :class="{'active': screen == 'md'}" @click="screen = 'md'">
                 <div class="wwi wwi-laptop"></div>
+                <div class="name">{{wwLang.getText('laptop')}}</div>
             </div>
             <div class="screen lg" :class="{'active': screen == 'lg'}" @click="screen = 'lg'">
                 <div class="wwi wwi-screen"></div>
+                <div class="name">{{wwLang.getText('desktop')}}</div>
             </div>
         </div>
         <div class="preview-container">
@@ -375,6 +379,10 @@ export default {
     },
     methods: {
         init: function () {
+
+            this.screen = wwLib.$store.getters['front/getScreenSize'];
+
+
             this.config = this.options.data.wwObject && this.options.data.wwObject.content && this.options.data.wwObject.content.data
                 && this.options.data.wwObject.content.data.config ? this.options.data.wwObject.content.data.config : this.config;
 
@@ -717,7 +725,7 @@ $ww-font: "Monserrat", sans-serif;
         display: flex;
         justify-content: center;
         position: relative;
-        height: 65px;
+        height: 80px;
         align-items: flex-end;
 
         &::after {
@@ -768,15 +776,22 @@ $ww-font: "Monserrat", sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 60px;
+            flex-direction: column;
+            height: 75px;
             width: 70px;
             cursor: pointer;
             transition: all 0.5s ease, height 0.2s ease;
+
+            & .name {
+                font-size: 0.8rem;
+                font-family: $ww-font;
+            }
+
             &:hover {
-                height: 65px;
+                height: 80px;
             }
             &.active {
-                height: 65px;
+                height: 80px;
                 z-index: 1;
                 background-color: white;
                 &.xs {
