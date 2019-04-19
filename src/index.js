@@ -6,6 +6,40 @@ const version = '__VERSION__';
 const addComponent = function () {
     if (window.vm) {
 
+        const background = {
+            link: {
+                data: {},
+                type: 'none'
+            },
+            content: {
+                data: {
+                    style: {
+                        boxShadow: {
+                            b: 0,
+                            c: "",
+                            s: 0,
+                            x: 0,
+                            y: 0
+                        },
+                        borderColor: null,
+                        borderStyle: null,
+                        borderWidth: 0,
+                        borderRadius: 0
+                    },
+                    backgroundColor: 'transparent'
+                },
+                type: 'ww-color'
+            },
+            paddings: {
+                xs: {
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0
+                }
+            },
+        }
+
         wwLib.wwObject.register({
             content: {
                 type: name,
@@ -36,15 +70,15 @@ const addComponent = function () {
                     },
                     columns: [
                         {
-                            background: null,
+                            background: background,
                             wwObjects: []
                         },
                         {
-                            background: null,
+                            background: background,
                             wwObjects: []
                         },
                         {
-                            background: null,
+                            background: background,
                             wwObjects: []
                         }
                     ]
