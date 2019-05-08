@@ -423,6 +423,7 @@ export default {
 .ww-columns {
     display: flex;
     position: relative;
+    min-height: 60px;
 }
 
 .ww-column {

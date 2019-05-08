@@ -7,6 +7,7 @@ const addComponent = function () {
     if (window.vm) {
 
         const background = {
+            uniqueId: null,
             link: {
                 data: {},
                 type: 'none'
@@ -70,15 +71,15 @@ const addComponent = function () {
                     },
                     columns: [
                         {
-                            background: background,
+                            background: JSON.parse(JSON.stringify(background)),
                             wwObjects: []
                         },
                         {
-                            background: background,
+                            background: JSON.parse(JSON.stringify(background)),
                             wwObjects: []
                         },
                         {
-                            background: background,
+                            background: JSON.parse(JSON.stringify(background)),
                             wwObjects: []
                         }
                     ]
