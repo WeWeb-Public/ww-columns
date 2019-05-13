@@ -442,17 +442,17 @@ export default {
                 style.borderTopStyle = column.borders[0].style;
                 style.borderTopColor = column.borders[0].color;
 
-                style.borderRightWidth = column.borders[1].width + 'px';
-                style.borderRightStyle = column.borders[1].style;
-                style.borderRightColor = column.borders[1].color;
+                style.borderLeftWidth = column.borders[1].width + 'px';
+                style.borderLeftStyle = column.borders[1].style;
+                style.borderLeftColor = column.borders[1].color;
 
                 style.borderBottomWidth = column.borders[2].width + 'px';
                 style.borderBottomStyle = column.borders[2].style;
                 style.borderBottomColor = column.borders[2].color;
 
-                style.borderLeftWidth = column.borders[3].width + 'px';
-                style.borderLeftStyle = column.borders[3].style;
-                style.borderLeftColor = column.borders[3].color;
+                style.borderRightWidth = column.borders[3].width + 'px';
+                style.borderRightStyle = column.borders[3].style;
+                style.borderRightColor = column.borders[3].color;
             }
 
             // if (column.radius && column.radius.length == 4) {
