@@ -494,7 +494,7 @@ export default {
         border-right: 1px solid #03a9f457;
     }
 }
-.ww-editing .ww-column-preview {
+.ww-editing-content .ww-column-preview {
     display: block;
 }
 /* 
