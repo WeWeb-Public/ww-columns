@@ -247,14 +247,6 @@ export default {
             return this.wwObject.content.data.columns[index] || {};
         },
 
-        wwAdd(list, options) {
-            list.splice(options.index, 0, options.wwObject);
-            this.wwObjectCtrl.update(this.wwObject);
-        },
-        wwRemove(list, options) {
-            list.splice(options.index, 1);
-            this.wwObjectCtrl.update(this.wwObject);
-        },
         /*=============================================m_ÔÔ_m=============================================\
           STYLE FUNCTIONS
         \================================================================================================*/
@@ -265,9 +257,8 @@ export default {
                 alignItems: this.aligns[column.align || 0],
                 display: column.hide ? 'none' : 'flex',
                 minHeight: this.columnHeight,
+                order: column.order || null,
             }
-
-
 
             return style;
         },
@@ -296,6 +287,14 @@ export default {
         },
 
         /* wwManager:start */
+        wwAdd(list, options) {
+            list.splice(options.index, 0, options.wwObject);
+            this.wwObjectCtrl.update(this.wwObject);
+        },
+        wwRemove(list, options) {
+            list.splice(options.index, 1);
+            this.wwObjectCtrl.update(this.wwObject);
+        },
         getOffsetStyle(column) {
             let width = column.offset / column.width * 100;
             return {

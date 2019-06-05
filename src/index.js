@@ -52,14 +52,17 @@ const addComponent = function () {
                             ignore: false,
                             cols: [{
                                 offset: 0,
+                                order: 0,
                                 width: 33.33,
                                 borders: []
                             }, {
                                 offset: 0,
+                                order: 1,
                                 width: 33.33,
                                 borders: []
                             }, {
                                 offset: 0,
+                                order: 3,
                                 width: 33.33,
                                 borders: []
                             }

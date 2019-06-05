@@ -79,6 +79,10 @@
         "en": "Width",
         "fr": "Largeur"
     },
+    "order": {
+        "en": "Order",
+        "fr": "Ordre"
+    },
     "borderTop": {
         "en": "Top",
         "fr": "Haut"

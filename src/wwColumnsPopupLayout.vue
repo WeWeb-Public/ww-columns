@@ -82,6 +82,7 @@
                             <wwManagerInput :color="getColor(index)" :label="wwLang.getText('offset') +' - %'" v-model="column.offset"></wwManagerInput>
                             <wwManagerInput :color="getColor(index)" :label="wwLang.getText('width') +' - %'" v-model="column.width"></wwManagerInput>
                             <wwManagerSelect class="select" v-model="column.align" :options="alignOptions"></wwManagerSelect>
+                            <wwManagerInput :color="getColor(index)" :label="wwLang.getText('order')" v-model="column.order"></wwManagerInput>
                         </div>
                     </div>
                 </div>
@@ -414,7 +415,8 @@ export default {
                 marginLeft: (column.offset || 0) + '%',
                 flexBasis: (column.width || 0) + '%',
                 height: (90 - 5 * Math.floor(this.config.count / 10)) + 'px',
-                alignItems: align
+                alignItems: align,
+                order: column.order || null
             }
 
             return style;
@@ -519,6 +521,7 @@ export default {
                         confCols[i].width = confCols[i].width || 100 / this.config.count;
                         confCols[i].offset = confCols[i].offset || 0;
                         confCols[i].borders = (confCols[i].borders && confCols[i].borders.length == 4) ? confCols[i].borders : JSON.parse(JSON.stringify(this.defaultBorders));
+                        confCols[i].order = confCols[i].order || i;
                         //confCols[i].radius = confCols[i].radius || JSON.parse(JSON.stringify(this.defaultRadius));
                         //confCols[i].shadow = confCols[i].shadow || JSON.parse(JSON.stringify(this.defaultShadow));
 
@@ -530,6 +533,7 @@ export default {
                             width: 100 / this.config.count,
                             offset: 0,
                             borders: JSON.parse(JSON.stringify(this.defaultBorders)),
+                            order: i,
                             //radius: JSON.parse(JSON.stringify(this.defaultRadius)),
                             //shadow: JSON.parse(JSON.stringify(this.defaultShadow))
                         })
@@ -1147,6 +1151,9 @@ $ww-font: "Monserrat", sans-serif;
                         align-items: center;
                         .select {
                             flex-basis: 150px;
+                        }
+                        .ww-manager-input {
+                            width: 100px;
                         }
                     }
                     .content-border {
