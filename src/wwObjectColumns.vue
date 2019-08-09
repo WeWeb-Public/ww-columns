@@ -97,7 +97,7 @@ export default {
             return this.wwObjectCtrl.get();
         },
         screenCols() {
-            return this.wwObject.content.data.config[this.getScreenSize()].cols;
+            return this.wwObject.data.config[this.getScreenSize()].cols;
         },
         columnHeight() {
             let height = '60px';
@@ -111,12 +111,12 @@ export default {
             let wwObjectHeight;
 
             try {
-                wwObjectHeight = parseFloat(this.wwObject.content.data.config[this.getScreenSize()].height);
+                wwObjectHeight = parseFloat(this.wwObject.data.config[this.getScreenSize()].height);
             } catch (error) {
                 wwObjectHeight = 0;
             }
 
-            const wwObjectUnit = this.wwObject.content.data.config[this.getScreenSize()].unit || '%';
+            const wwObjectUnit = this.wwObject.data.config[this.getScreenSize()].unit || '%';
 
             height = wwObjectHeight || height;
 
@@ -138,7 +138,7 @@ export default {
         },
         wrap() {
             return {
-                flexWrap: this.wwObject.content.data.config[this.getScreenSize()].nowrap ? 'nowrap' : 'wrap'
+                flexWrap: this.wwObject.data.config[this.getScreenSize()].nowrap ? 'nowrap' : 'wrap'
             }
         }
     },
@@ -151,15 +151,15 @@ export default {
         getScreenSize() {
             let screen = this.screen || 'lg';
 
-            if (screen == 'lg' && (!this.wwObject.content.data.config['lg'] || this.wwObject.content.data.config['lg'].ignore)) {
+            if (screen == 'lg' && (!this.wwObject.data.config['lg'] || this.wwObject.data.config['lg'].ignore)) {
                 screen = 'md';
             }
 
-            if (screen == 'md' && (!this.wwObject.content.data.config['md'] || this.wwObject.content.data.config['md'].ignore)) {
+            if (screen == 'md' && (!this.wwObject.data.config['md'] || this.wwObject.data.config['md'].ignore)) {
                 screen = 'sm';
             }
 
-            if (screen == 'sm' && (!this.wwObject.content.data.config['sm'] || this.wwObject.content.data.config['sm'].ignore)) {
+            if (screen == 'sm' && (!this.wwObject.data.config['sm'] || this.wwObject.data.config['sm'].ignore)) {
                 screen = 'xs';
             }
 
@@ -171,7 +171,7 @@ export default {
         },
 
         correctConfigs(newConfig) {
-            let config = newConfig || this.wwObject.content.data.config || {};
+            let config = newConfig || this.wwObject.data.config || {};
             config.count = config.count || 1;
             config.height = config.height || null;
 
@@ -221,10 +221,10 @@ export default {
             }
 
             let colData = [];
-            this.wwObject.content.data.columns = this.wwObject.content.data.columns || [];
+            this.wwObject.data.columns = this.wwObject.data.columns || [];
             for (let i = 0; i < config.count; i++) {
-                if (this.wwObject.content.data.columns[i]) {
-                    colData[i] = this.wwObject.content.data.columns[i];
+                if (this.wwObject.data.columns[i]) {
+                    colData[i] = this.wwObject.data.columns[i];
                     if (!colData[i].background) {
                         colData[i].background = wwLib.wwObject.getDefault({ type: 'ww-color' });
                     }
@@ -236,15 +236,15 @@ export default {
                     }
                 }
             }
-            this.wwObject.content.data.columns = colData;
+            this.wwObject.data.columns = colData;
 
-            this.wwObject.content.data.config = config || {};
+            this.wwObject.data.config = config || {};
 
             this.wwObjectCtrl.update(this.wwObject);
         },
 
         getColData(index) {
-            return this.wwObject.content.data.columns[index] || {};
+            return this.wwObject.data.columns[index] || {};
         },
 
         /*=============================================m_ÔÔ_m=============================================\
@@ -254,6 +254,7 @@ export default {
             let style = {
                 marginLeft: (column.offset || 0) + '%',
                 flexBasis: (column.width || 0) + '%',
+                maxWidth: (column.width || 0) + '%',
                 alignItems: this.aligns[column.align || 0],
                 display: column.hide ? 'none' : 'flex',
                 minHeight: this.columnHeight,

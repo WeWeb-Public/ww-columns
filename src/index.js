@@ -42,57 +42,6 @@ const addComponent = function () {
         }
 
         wwLib.wwObject.register({
-            content: {
-                type: name,
-                data: {
-                    config: {
-                        count: 3,
-                        xs: {
-                            height: null,
-                            ignore: false,
-                            cols: [{
-                                offset: 0,
-                                order: 0,
-                                width: 33.33,
-                                borders: []
-                            }, {
-                                offset: 0,
-                                order: 1,
-                                width: 33.33,
-                                borders: []
-                            }, {
-                                offset: 0,
-                                order: 3,
-                                width: 33.33,
-                                borders: []
-                            }
-                            ]
-                        },
-                        sm: null,
-                        md: null,
-                        lg: null
-                    },
-                    columns: [
-                        {
-                            background: JSON.parse(JSON.stringify(background)),
-                            wwObjects: []
-                        },
-                        {
-                            background: JSON.parse(JSON.stringify(background)),
-                            wwObjects: []
-                        },
-                        {
-                            background: JSON.parse(JSON.stringify(background)),
-                            wwObjects: []
-                        }
-                    ]
-                }
-            },
-            upsales: {
-                wwAnalytics: {
-                    click: false
-                }
-            },
             /* wwManager:start */
             cmsOptions: {
                 wwObjectHover: {
@@ -146,8 +95,59 @@ const addComponent = function () {
 
                     ]
                 }
-            }
+            },
             /* wwManager:end */
+            content: {
+                type: name,
+                data: {
+                    config: {
+                        count: 3,
+                        xs: {
+                            height: null,
+                            ignore: false,
+                            cols: [{
+                                offset: 0,
+                                order: 0,
+                                width: 33.33,
+                                borders: []
+                            }, {
+                                offset: 0,
+                                order: 1,
+                                width: 33.33,
+                                borders: []
+                            }, {
+                                offset: 0,
+                                order: 3,
+                                width: 33.33,
+                                borders: []
+                            }
+                            ]
+                        },
+                        sm: null,
+                        md: null,
+                        lg: null
+                    },
+                    columns: [
+                        {
+                            background: JSON.parse(JSON.stringify(background)),
+                            wwObjects: []
+                        },
+                        {
+                            background: JSON.parse(JSON.stringify(background)),
+                            wwObjects: []
+                        },
+                        {
+                            background: JSON.parse(JSON.stringify(background)),
+                            wwObjects: []
+                        }
+                    ]
+                }
+            },
+            upsales: {
+                wwAnalytics: {
+                    click: false
+                }
+            }
         });
 
         window.vm.addComponent({

@@ -384,8 +384,8 @@ export default {
             this.screen = wwLib.$store.getters['front/getScreenSize'];
 
 
-            this.config = this.options.data.wwObject && this.options.data.wwObject.content && this.options.data.wwObject.content.data
-                && this.options.data.wwObject.content.data.config ? this.options.data.wwObject.content.data.config : this.config;
+            this.config = this.options.data.wwObject && this.options.data.wwObject && this.options.data.wwObject.data
+                && this.options.data.wwObject.data.config ? this.options.data.wwObject.data.config : this.config;
 
             this.correctConfigs();
 
