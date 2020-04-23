@@ -147,38 +147,31 @@
 
 
 <script>
-import langPopupLayout from './langPopupLayout.json';
+import langPopupLayout from "./langPopupLayout.json";
 
 export default {
     name: "wwColumnsPopupLayout",
     props: {
-        options: Object,
+        options: Object
     },
     data() {
         return {
             wwLang: wwLib.wwManagerLang.use(langPopupLayout),
 
-            screens: ['xs', 'sm', 'md', 'lg'],
+            screens: ["xs", "sm", "md", "lg"],
             screenNames: {
-                xs: 'mobile',
-                sm: 'tablet',
-                md: 'laptop',
-                lg: 'desktop'
+                xs: "mobile",
+                sm: "tablet",
+                md: "laptop",
+                lg: "desktop"
             },
-            screen: 'xs',
+            screen: "xs",
 
             columnsCount: 0,
 
-            mode: 'size',
+            mode: "size",
 
-            colors: [
-                'blue',
-                'yellow',
-                'pink',
-                'orange',
-                'green',
-                'red'
-            ],
+            colors: ["blue", "yellow", "pink", "orange", "green", "red"],
 
             defaultBorders: [
                 {
@@ -210,7 +203,7 @@ export default {
                 y: 0,
                 blur: 0,
                 spread: 0,
-                color: '#000000'
+                color: "#000000"
             },
 
             config: {
@@ -224,143 +217,133 @@ export default {
 
             copiedColumnConfig: {},
 
-            activeScreen: 'xs',
+            activeScreen: "xs",
 
             /*=============================================m_ÔÔ_m=============================================\
               OPTIONS
             \================================================================================================*/
             unitOptions: {
-                type: 'text',
+                type: "text",
                 values: [
                     {
                         value: "%",
                         default: true,
                         text: {
-                            en: '% - Percent (screen)',
-                            fr: '% - Poucentage (écran)'
+                            en: "% - Percent (screen)",
+                            fr: "% - Poucentage (écran)"
                         }
                     },
                     {
                         value: "px",
                         text: {
-                            en: 'px - Pixels',
-                            fr: 'px - Pixels'
+                            en: "px - Pixels",
+                            fr: "px - Pixels"
                         }
                     }
                 ]
             },
 
             wrapOptions: {
-                type: 'text',
+                type: "text",
                 values: [
                     {
                         value: false,
                         default: true,
                         text: {
-                            en: 'Wrap columns',
-                            fr: 'Superposer les colonnes'
+                            en: "Wrap columns",
+                            fr: "Superposer les colonnes"
                         }
                     },
                     {
                         value: true,
                         text: {
-                            en: 'Do not wrap columns',
-                            fr: 'Ne pas superposer les colonnes'
+                            en: "Do not wrap columns",
+                            fr: "Ne pas superposer les colonnes"
                         }
                     }
                 ]
             },
 
             alignOptions: {
-                type: 'text',
+                type: "text",
                 values: [
                     {
                         value: "0",
                         default: true,
                         text: {
-                            en: 'Default',
-                            fr: 'Défaut'
+                            en: "Default",
+                            fr: "Défaut"
                         }
                     },
                     {
                         value: "1",
                         text: {
-                            en: 'Top',
-                            fr: 'Haut'
+                            en: "Top",
+                            fr: "Haut"
                         }
                     },
                     {
                         value: "2",
                         text: {
-                            en: 'Center',
-                            fr: 'Milieu'
+                            en: "Center",
+                            fr: "Milieu"
                         }
                     },
                     {
                         value: "3",
                         text: {
-                            en: 'Bottom',
-                            fr: 'Bas'
+                            en: "Bottom",
+                            fr: "Bas"
                         }
-                    },
+                    }
                 ]
             },
 
             borderStyleOptions: {
-                type: 'text',
+                type: "text",
                 values: [
                     {
-                        value: 'none',
+                        value: "none",
                         default: true,
                         text: {
-                            en: 'None',
-                            fr: 'Aucune'
+                            en: "None",
+                            fr: "Aucune"
                         }
                     },
                     {
-                        value: 'solid',
+                        value: "solid",
                         text: {
-                            en: 'Solid',
-                            fr: 'Continue'
+                            en: "Solid",
+                            fr: "Continue"
                         }
                     },
                     {
-                        value: 'dotted',
+                        value: "dotted",
                         text: {
-                            en: 'Dotted',
-                            fr: 'Pointillés'
+                            en: "Dotted",
+                            fr: "Pointillés"
                         }
                     },
                     {
-                        value: 'dashed',
+                        value: "dashed",
                         text: {
-                            en: 'Dashed',
-                            fr: 'Tirets'
+                            en: "Dashed",
+                            fr: "Tirets"
                         }
                     },
                     {
-                        value: 'double',
+                        value: "double",
                         text: {
-                            en: 'Double',
-                            fr: 'Double'
+                            en: "Double",
+                            fr: "Double"
                         }
-                    },
+                    }
                 ]
             },
 
-            borderNames: [
-                'borderTop',
-                'borderLeft',
-                'borderBottom',
-                'borderRight'
-            ],
+            borderNames: ["borderTop", "borderLeft", "borderBottom", "borderRight"],
 
-            radiusNames: [
-                'radiusTopLeft',
-                'radiusTopRight',
-                'radiusBottomRight',
-                'radiusBottomLeft'
-            ],
+            radiusNames: ["radiusTopLeft", "radiusTopRight", "radiusBottomRight", "radiusBottomLeft"]
         };
     },
     computed: {
@@ -376,16 +359,12 @@ export default {
             return this.config[screen].cols;
         }
     },
-    watch: {
-    },
+    watch: {},
     methods: {
-        init: function () {
+        init: function() {
+            this.screen = wwLib.$store.getters["front/getScreenSize"] || "xs";
 
-            this.screen = wwLib.$store.getters['front/getScreenSize'];
-
-
-            this.config = this.options.data.wwObject && this.options.data.wwObject.content && this.options.data.wwObject.content.data
-                && this.options.data.wwObject.content.data.config ? this.options.data.wwObject.content.data.config : this.config;
+            this.config = this.options.data.wwObject && this.options.data.wwObject.content && this.options.data.wwObject.content.data && this.options.data.wwObject.content.data.config ? this.options.data.wwObject.content.data.config : this.config;
 
             this.correctConfigs();
 
@@ -399,25 +378,24 @@ export default {
             let align;
             switch (column.align) {
                 case "1":
-                    align = 'flex-start';
+                    align = "flex-start";
                     break;
                 case "2":
-                    align = 'center';
+                    align = "center";
                     break;
                 case "3":
-                    align = 'flex-end';
+                    align = "flex-end";
                     break;
                 default:
-                    align = 'center';
-
+                    align = "center";
             }
             let style = {
-                marginLeft: (column.offset || 0) + '%',
-                flexBasis: (column.width || 0) + '%',
-                height: (90 - 5 * Math.floor(this.config.count / 10)) + 'px',
+                marginLeft: (column.offset || 0) + "%",
+                flexBasis: (column.width || 0) + "%",
+                height: 90 - 5 * Math.floor(this.config.count / 10) + "px",
                 alignItems: align,
                 order: column.order || null
-            }
+            };
 
             return style;
         },
@@ -432,27 +410,27 @@ export default {
             this.activeScreen = screen;
 
             return {
-                flexWrap: this.config[screen].nowrap ? 'nowrap' : 'wrap'
-            }
+                flexWrap: this.config[screen].nowrap ? "nowrap" : "wrap"
+            };
         },
 
         getBorderStyle(column) {
             let style = {};
 
             if (column.borders && column.borders.length == 4) {
-                style.borderTopWidth = column.borders[0].width + 'px';
+                style.borderTopWidth = column.borders[0].width + "px";
                 style.borderTopStyle = column.borders[0].style;
                 style.borderTopColor = column.borders[0].color;
 
-                style.borderLeftWidth = column.borders[1].width + 'px';
+                style.borderLeftWidth = column.borders[1].width + "px";
                 style.borderLeftStyle = column.borders[1].style;
                 style.borderLeftColor = column.borders[1].color;
 
-                style.borderBottomWidth = column.borders[2].width + 'px';
+                style.borderBottomWidth = column.borders[2].width + "px";
                 style.borderBottomStyle = column.borders[2].style;
                 style.borderBottomColor = column.borders[2].color;
 
-                style.borderRightWidth = column.borders[3].width + 'px';
+                style.borderRightWidth = column.borders[3].width + "px";
                 style.borderRightStyle = column.borders[3].style;
                 style.borderRightColor = column.borders[3].color;
             }
@@ -499,18 +477,18 @@ export default {
                     };
                 }
 
-                if (screen == 'xs') {
+                if (screen == "xs") {
                     this.config[screen].ignore = false;
                 }
 
                 if (this.config[screen][0]) {
                     this.config[screen] = {
                         cols: this.config[screen]
-                    }
+                    };
                 }
 
                 this.config[screen].height = Math.max(this.config[screen].height || 0, 0);
-                this.config[screen].unit = this.config[screen].unit || '%';
+                this.config[screen].unit = this.config[screen].unit || "%";
 
                 let cols = [];
                 for (let i = 0; i < this.config.count; i++) {
@@ -520,23 +498,22 @@ export default {
                         confCols[i].align = confCols[i].align || "1";
                         confCols[i].width = confCols[i].width || 100 / this.config.count;
                         confCols[i].offset = confCols[i].offset || 0;
-                        confCols[i].borders = (confCols[i].borders && confCols[i].borders.length == 4) ? confCols[i].borders : JSON.parse(JSON.stringify(this.defaultBorders));
+                        confCols[i].borders = confCols[i].borders && confCols[i].borders.length == 4 ? confCols[i].borders : JSON.parse(JSON.stringify(this.defaultBorders));
                         confCols[i].order = confCols[i].order || i;
                         //confCols[i].radius = confCols[i].radius || JSON.parse(JSON.stringify(this.defaultRadius));
                         //confCols[i].shadow = confCols[i].shadow || JSON.parse(JSON.stringify(this.defaultShadow));
 
                         cols.push(confCols[i]);
-                    }
-                    else {
+                    } else {
                         cols.push({
                             align: "1",
                             width: 100 / this.config.count,
                             offset: 0,
                             borders: JSON.parse(JSON.stringify(this.defaultBorders)),
-                            order: i,
+                            order: i
                             //radius: JSON.parse(JSON.stringify(this.defaultRadius)),
                             //shadow: JSON.parse(JSON.stringify(this.defaultShadow))
-                        })
+                        });
                     }
                 }
 
@@ -547,18 +524,18 @@ export default {
 
         copyConfig(type, index) {
             switch (type) {
-                case 'size':
+                case "size":
                     this.copiedColumnConfig.style = {};
-                    Vue.set(this.copiedColumnConfig.style, 'width', this.config[this.screen].cols[index].width);
-                    Vue.set(this.copiedColumnConfig.style, 'offset', this.config[this.screen].cols[index].offset);
-                    Vue.set(this.copiedColumnConfig.style, 'align', this.config[this.screen].cols[index].align);
-                    Vue.set(this.copiedColumnConfig.style, 'hide', this.config[this.screen].cols[index].hide);
+                    Vue.set(this.copiedColumnConfig.style, "width", this.config[this.screen].cols[index].width);
+                    Vue.set(this.copiedColumnConfig.style, "offset", this.config[this.screen].cols[index].offset);
+                    Vue.set(this.copiedColumnConfig.style, "align", this.config[this.screen].cols[index].align);
+                    Vue.set(this.copiedColumnConfig.style, "hide", this.config[this.screen].cols[index].hide);
                     break;
-                case 'border':
+                case "border":
                     this.copiedColumnConfig.border = JSON.parse(JSON.stringify(this.config[this.screen].cols[index].borders));
                     //this.copiedColumnConfig.radius = JSON.parse(JSON.stringify(this.config[this.screen].cols[index].radius));
                     break;
-                case 'shadow':
+                case "shadow":
                     this.copiedColumnConfig.shadow = JSON.parse(JSON.stringify(this.config[this.screen].cols[index].shadow));
                     break;
                 default:
@@ -570,18 +547,18 @@ export default {
 
         pasteConfig(type, index) {
             switch (type) {
-                case 'size':
-                    Vue.set(this.config[this.screen].cols[index], 'width', this.copiedColumnConfig.style.width);
-                    Vue.set(this.config[this.screen].cols[index], 'offset', this.copiedColumnConfig.style.offset);
-                    Vue.set(this.config[this.screen].cols[index], 'align', this.copiedColumnConfig.style.align);
-                    Vue.set(this.config[this.screen].cols[index], 'hide', this.copiedColumnConfig.style.hide);
+                case "size":
+                    Vue.set(this.config[this.screen].cols[index], "width", this.copiedColumnConfig.style.width);
+                    Vue.set(this.config[this.screen].cols[index], "offset", this.copiedColumnConfig.style.offset);
+                    Vue.set(this.config[this.screen].cols[index], "align", this.copiedColumnConfig.style.align);
+                    Vue.set(this.config[this.screen].cols[index], "hide", this.copiedColumnConfig.style.hide);
                     break;
-                case 'border':
-                    Vue.set(this.config[this.screen].cols[index], 'borders', JSON.parse(JSON.stringify(this.copiedColumnConfig.border)));
+                case "border":
+                    Vue.set(this.config[this.screen].cols[index], "borders", JSON.parse(JSON.stringify(this.copiedColumnConfig.border)));
                     //Vue.set(this.config[this.screen].cols[index], 'radius', JSON.parse(JSON.stringify(this.copiedColumnConfig.radius)));
                     break;
-                case 'shadow':
-                    Vue.set(this.config[this.screen].cols[index], 'shadow', JSON.parse(JSON.stringify(this.copiedColumnConfig.shadow)));
+                case "shadow":
+                    Vue.set(this.config[this.screen].cols[index], "shadow", JSON.parse(JSON.stringify(this.copiedColumnConfig.shadow)));
                     break;
                 default:
                     break;
@@ -612,7 +589,7 @@ export default {
 
             const offsetPerLine = offset * (Math.min(this.config.count, 10) + 1);
 
-            let width = Math.max(10 - offsetPerLine / 10, ((100 - offsetPerLine) / this.config.count));
+            let width = Math.max(10 - offsetPerLine / 10, (100 - offsetPerLine) / this.config.count);
 
             for (let i = 0; i < this.config.count; i++) {
                 this.screenCols[i].width = width;
@@ -624,19 +601,17 @@ export default {
         },
 
         setBorderStyle(column, index, width) {
-            if (width != 0 && column.borders[index].style == 'none') {
-                column.borders[index].style = 'solid';
-            }
-            else if (width == 0) {
-                column.borders[index].style = 'none';
+            if (width != 0 && column.borders[index].style == "none") {
+                column.borders[index].style = "solid";
+            } else if (width == 0) {
+                column.borders[index].style = "none";
             }
         },
 
         setBorderWidth(column, index, style) {
-            if (style != 'none' && column.borders[index].width == 0) {
+            if (style != "none" && column.borders[index].width == 0) {
                 column.borders[index].width = 1;
-            }
-            else if (style == 'none') {
+            } else if (style == "none") {
                 column.borders[index].width = 0;
             }
         },
@@ -650,8 +625,6 @@ export default {
             config.nowrap = value;
             this.$forceUpdate();
         },
-
-
 
         /*=============================================m_ÔÔ_m=============================================\
           UTILS
@@ -674,11 +647,10 @@ export default {
                 return 0;
             }
 
-            return this.$el.querySelector('.preview').getBoundingClientRect().width * column.offset / 100;
+            return (this.$el.querySelector(".preview").getBoundingClientRect().width * column.offset) / 100;
         },
 
         beforeNext() {
-
             let config = JSON.parse(JSON.stringify(this.config));
             config.sm.cols = config.sm.ignore ? null : config.sm.cols;
             config.md.cols = config.md.ignore ? null : config.md.cols;
@@ -690,11 +662,8 @@ export default {
     created() {
         this.init();
     },
-    mounted() {
-    },
-    beforeDestroyed() {
-
-    }
+    mounted() {},
+    beforeDestroyed() {}
 };
 </script>
 
@@ -741,13 +710,7 @@ $ww-font: "Monserrat", sans-serif;
             height: 2px;
             width: 450px;
             transition: background-color 0.5s ease;
-            background: linear-gradient(
-                to right,
-                #efefef 0%,
-                transparent 30%,
-                transparent 70%,
-                #efefef 100%
-            );
+            background: linear-gradient(to right, #efefef 0%, transparent 30%, transparent 70%, #efefef 100%);
         }
         &.xs {
             &::after {
@@ -822,16 +785,7 @@ $ww-font: "Monserrat", sans-serif;
         .preview {
             display: flex;
             min-height: 30px;
-            background-image: linear-gradient(
-                135deg,
-                #000000 6.25%,
-                #ffffff00 6.25%,
-                #ffffff00 50%,
-                #000000 50%,
-                #000000 56.25%,
-                #ffffff00 56.25%,
-                #ffffff00 100%
-            );
+            background-image: linear-gradient(135deg, #000000 6.25%, #ffffff00 6.25%, #ffffff00 50%, #000000 50%, #000000 56.25%, #ffffff00 56.25%, #ffffff00 100%);
             background-size: 11.31px 11.31px;
             .column {
                 position: relative;
@@ -847,16 +801,7 @@ $ww-font: "Monserrat", sans-serif;
                         background-color: $ww-blue;
                     }
                     .offset {
-                        background-image: linear-gradient(
-                            135deg,
-                            $ww-blue 6.25%,
-                            #ffffff00 6.25%,
-                            #ffffff00 50%,
-                            $ww-blue 50%,
-                            $ww-blue 56.25%,
-                            #ffffff00 56.25%,
-                            #ffffff00 100%
-                        );
+                        background-image: linear-gradient(135deg, $ww-blue 6.25%, #ffffff00 6.25%, #ffffff00 50%, $ww-blue 50%, $ww-blue 56.25%, #ffffff00 56.25%, #ffffff00 100%);
                     }
                 }
                 &.pink {
@@ -865,16 +810,7 @@ $ww-font: "Monserrat", sans-serif;
                         background-color: $ww-pink;
                     }
                     .offset {
-                        background-image: linear-gradient(
-                            135deg,
-                            $ww-pink 6.25%,
-                            #ffffff00 6.25%,
-                            #ffffff00 50%,
-                            $ww-pink 50%,
-                            $ww-pink 56.25%,
-                            #ffffff00 56.25%,
-                            #ffffff00 100%
-                        );
+                        background-image: linear-gradient(135deg, $ww-pink 6.25%, #ffffff00 6.25%, #ffffff00 50%, $ww-pink 50%, $ww-pink 56.25%, #ffffff00 56.25%, #ffffff00 100%);
                     }
                 }
                 &.yellow {
@@ -883,16 +819,7 @@ $ww-font: "Monserrat", sans-serif;
                         background-color: $ww-yellow;
                     }
                     .offset {
-                        background-image: linear-gradient(
-                            135deg,
-                            $ww-yellow 6.25%,
-                            #ffffff00 6.25%,
-                            #ffffff00 50%,
-                            $ww-yellow 50%,
-                            $ww-yellow 56.25%,
-                            #ffffff00 56.25%,
-                            #ffffff00 100%
-                        );
+                        background-image: linear-gradient(135deg, $ww-yellow 6.25%, #ffffff00 6.25%, #ffffff00 50%, $ww-yellow 50%, $ww-yellow 56.25%, #ffffff00 56.25%, #ffffff00 100%);
                     }
                 }
                 &.orange {
@@ -901,16 +828,7 @@ $ww-font: "Monserrat", sans-serif;
                         background-color: $ww-orange;
                     }
                     .offset {
-                        background-image: linear-gradient(
-                            135deg,
-                            $ww-orange 6.25%,
-                            #ffffff00 6.25%,
-                            #ffffff00 50%,
-                            $ww-orange 50%,
-                            $ww-orange 56.25%,
-                            #ffffff00 56.25%,
-                            #ffffff00 100%
-                        );
+                        background-image: linear-gradient(135deg, $ww-orange 6.25%, #ffffff00 6.25%, #ffffff00 50%, $ww-orange 50%, $ww-orange 56.25%, #ffffff00 56.25%, #ffffff00 100%);
                     }
                 }
                 &.green {
@@ -919,16 +837,7 @@ $ww-font: "Monserrat", sans-serif;
                         background-color: $ww-green;
                     }
                     .offset {
-                        background-image: linear-gradient(
-                            135deg,
-                            $ww-green 6.25%,
-                            #ffffff00 6.25%,
-                            #ffffff00 50%,
-                            $ww-green 50%,
-                            $ww-green 56.25%,
-                            #ffffff00 56.25%,
-                            #ffffff00 100%
-                        );
+                        background-image: linear-gradient(135deg, $ww-green 6.25%, #ffffff00 6.25%, #ffffff00 50%, $ww-green 50%, $ww-green 56.25%, #ffffff00 56.25%, #ffffff00 100%);
                     }
                 }
                 &.red {
@@ -937,16 +846,7 @@ $ww-font: "Monserrat", sans-serif;
                         background-color: $ww-red;
                     }
                     .offset {
-                        background-image: linear-gradient(
-                            135deg,
-                            $ww-red 6.25%,
-                            #ffffff00 6.25%,
-                            #ffffff00 50%,
-                            $ww-red 50%,
-                            $ww-red 56.25%,
-                            #ffffff00 56.25%,
-                            #ffffff00 100%
-                        );
+                        background-image: linear-gradient(135deg, $ww-red 6.25%, #ffffff00 6.25%, #ffffff00 50%, $ww-red 50%, $ww-red 56.25%, #ffffff00 56.25%, #ffffff00 100%);
                     }
                 }
                 .info {

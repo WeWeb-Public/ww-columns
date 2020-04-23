@@ -88,49 +88,8 @@ export default {
         };
     },
     computed: {
-        screen() {
-            return wwLib.$store.getters["front/getScreenSize"];
-        },
         wwObject() {
             return this.wwObjectCtrl.get();
-        },
-        screenCols() {
-            return this.wwObject.content.data.config[this.getScreenSize()].cols;
-        },
-        columnHeight() {
-            let height = "60px";
-
-            let defaultHeight = "60px";
-
-            if (this.wwAttrs && this.wwAttrs.wwColumnsDefaultHeight) {
-                height = this.wwAttrs.wwColumnsDefaultHeight;
-            }
-
-            let wwObjectHeight;
-
-            try {
-                wwObjectHeight = parseFloat(this.wwObject.content.data.config[this.getScreenSize()].height);
-            } catch (error) {
-                wwObjectHeight = 0;
-            }
-
-            const wwObjectUnit = this.wwObject.content.data.config[this.getScreenSize()].unit || "%";
-
-            height = wwObjectHeight || height;
-
-            if (height == "auto" || height == 0 || height == "0") {
-                return defaultHeight;
-            }
-
-            if (wwObjectUnit == "%") {
-                if (window.CSS && window.CSS.supports && window.CSS.supports("--fake-var", 0)) {
-                    return "calc(var(--vh, 1vh) * " + height + ")";
-                } else {
-                    return height + "vh";
-                }
-            } else {
-                return height + wwObjectUnit;
-            }
         },
         wrap() {
             return {
@@ -152,24 +111,6 @@ export default {
     watch: {},
     methods: {
         init() {},
-
-        getScreenSize() {
-            let screen = this.screen || "lg";
-
-            if (screen == "lg" && (!this.wwObject.content.data.config["lg"] || this.wwObject.content.data.config["lg"].ignore)) {
-                screen = "md";
-            }
-
-            if (screen == "md" && (!this.wwObject.content.data.config["md"] || this.wwObject.content.data.config["md"].ignore)) {
-                screen = "sm";
-            }
-
-            if (screen == "sm" && (!this.wwObject.content.data.config["sm"] || this.wwObject.content.data.config["sm"].ignore)) {
-                screen = "xs";
-            }
-
-            return screen;
-        },
 
         onResize() {
             this.setScreenSize();
@@ -255,43 +196,54 @@ export default {
         \================================================================================================*/
         getWidthAndOffset(columnIndex) {
             const getHeight = config => {
-                let height = "60px";
-
-                let defaultHeight = "60px";
+                let size = {
+                    height: 60,
+                    unit: "px"
+                };
 
                 if (this.wwAttrs && this.wwAttrs.wwColumnsDefaultHeight) {
-                    height = this.wwAttrs.wwColumnsDefaultHeight;
-                }
-
-                let wwObjectHeight;
-
-                try {
-                    wwObjectHeight = parseFloat(config.height);
-                } catch (error) {
-                    wwObjectHeight = 0;
-                }
-
-                const wwObjectUnit = config.unit || "%";
-
-                height = wwObjectHeight || height;
-
-                if (height == "auto" || height == 0 || height == "0") {
-                    return defaultHeight;
-                }
-
-                if (wwObjectUnit == "%") {
-                    if (window.CSS && window.CSS.supports && window.CSS.supports("--fake-var", 0)) {
-                        return "calc(var(--vh, 1vh) * " + height + ")";
-                    } else {
-                        return height + "vh";
+                    if (typeof this.wwAttrs.wwColumnsDefaultHeight == "string") {
+                        try {
+                            size = JSON.parse(this.wwAttrs.wwColumnsDefaultHeight);
+                        } catch (error) {}
+                    } else if (typeof this.wwAttrs.wwColumnsDefaultHeight.height !== "undefined" && typeof this.wwAttrs.wwColumnsDefaultHeight.unit !== "undefined") {
+                        size = JSON.parse(this.wwAttrs.wwColumnsDefaultHeight);
                     }
+                }
+
+                if (config.height) {
+                    if (typeof config.height == "string" && config.height != "auto") {
+                        try {
+                            size.height = parseFloat(config.height);
+                            size.unit = config.unit || "%";
+                        } catch (error) {}
+                    } else if (typeof config.height !== "undefined") {
+                        size.height = config.height;
+                        size.unit = config.unit || "%";
+                    }
+                }
+
+                if (size.height == 0) {
+                    size = {
+                        height: 60,
+                        unit: "px"
+                    };
+                }
+
+                if (size.unit == "%") {
+                    // if (window.CSS && window.CSS.supports && window.CSS.supports("--fake-var", 0)) {
+                    //     return "calc(var(--vh, 1vh) * " + size.height + size.unit + ")";
+                    // } else {
+                    return size.height + "vh";
+                    // }
                 } else {
-                    return height + wwObjectUnit;
+                    return size.height + size.unit;
                 }
             };
 
             const getStyle = screenSize => {
                 const col = this.wwObject.content.data.config[screenSize] && this.wwObject.content.data.config[screenSize].cols ? this.wwObject.content.data.config[screenSize].cols[columnIndex] : null;
+
                 return col
                     ? {
                           marginLeft: (col.offset || 0) + "%",
