@@ -271,8 +271,8 @@ export default {
                     //     return "calc(var(--vh, 1vh) * " + size.height + size.unit + ")";
                     // } else {
 
-                    return 'calc(var(--vh, 1vh) * ' + size.height + ')';
-                    // return size.height + "vh";
+                    // return 'calc(var(--vh, 1vh) * ' + size.height + ')';
+                    return size.height + 'vh';
                     // }
                 } else {
                     return size.height + size.unit;
