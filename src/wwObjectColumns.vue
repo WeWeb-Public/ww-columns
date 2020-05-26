@@ -139,88 +139,66 @@ export default {
             this.setScreenSize();
         },
 
-        correctConfigs() {
-            let needUpdate = false;
-
-            if (!this.wwObject.content.data.config || !this.wwObject.content.data.config.count) {
-                let config = this.wwObject.content.data.config || {};
-                config.count = config.count || 1;
-                config.height = config.height || null;
-
-                for (let screen of this.screens) {
-                    if (!config[screen]) {
-                        config[screen] = {
-                            ignore: screen != 'xs',
-                            cols: []
-                        };
-                    }
-
-                    if (config[screen][0]) {
-                        config[screen] = {
-                            cols: config[screen]
-                        };
-                    }
-
-                    if (!config[screen].ignore) {
-                        let cols = [];
-                        for (let i = 0; i < config.count; i++) {
-                            let confCols = config[screen].cols;
-
-                            if (confCols.length > i) {
-                                confCols[i].align = confCols[i].align || '1';
-                                confCols[i].width = confCols[i].width || 100 / config.count;
-                                confCols[i].offset = confCols[i].offset || 0;
-                                confCols[i].borders = confCols[i].borders || JSON.parse(JSON.stringify(this.defaultBorders));
-                                // confCols[i].radius = confCols[i].radius || JSON.parse(JSON.stringify(this.defaultRadius));
-                                // confCols[i].shadow = confCols[i].shadow || JSON.parse(JSON.stringify(this.defaultShadow));
-
-                                cols.push(confCols[i]);
-                            } else {
-                                cols.push({
-                                    align: '1',
-                                    width: 100 / config.count,
-                                    offset: 0,
-                                    borders: JSON.parse(JSON.stringify(this.defaultBorders))
-                                    // radius: JSON.parse(JSON.stringify(this.defaultRadius)),
-                                    // shadow: JSON.parse(JSON.stringify(this.defaultShadow))
-                                });
-                            }
-                        }
-
-                        config[screen].cols = cols;
-                    }
+        correctConfigs(newConfig) {
+            let config = newConfig || this.wwObject.content.data.config || {};
+            config.count = config.count || 1;
+            config.height = config.height || null;
+            for (let screen of this.screens) {
+                if (!config[screen]) {
+                    config[screen] = {
+                        ignore: screen != 'xs',
+                        cols: []
+                    };
                 }
-
-                this.wwObject.content.data.config = config || {};
-
-                needUpdate = true;
-            }
-
-            if (!this.wwObject.content.data.columns || this.wwObject.content.data.columns.length != this.wwObject.content.data.config.count) {
-                let colData = [];
-                let config = this.wwObject.content.data.config;
-                this.wwObject.content.data.columns = this.wwObject.content.data.columns || [];
-                for (let i = 0; i < config.count; i++) {
-                    if (this.wwObject.content.data.columns[i]) {
-                        colData[i] = this.wwObject.content.data.columns[i];
-                        if (!colData[i].background) {
-                            colData[i].background = wwLib.wwObject.getDefault({
-                                type: 'ww-color'
+                if (config[screen][0]) {
+                    config[screen] = {
+                        cols: config[screen]
+                    };
+                }
+                if (!config[screen].ignore) {
+                    let cols = [];
+                    for (let i = 0; i < config.count; i++) {
+                        let confCols = config[screen].cols;
+                        if (confCols.length > i) {
+                            confCols[i].align = confCols[i].align || '1';
+                            confCols[i].width = confCols[i].width || 100 / config.count;
+                            confCols[i].offset = confCols[i].offset || 0;
+                            confCols[i].borders = confCols[i].borders || JSON.parse(JSON.stringify(this.defaultBorders));
+                            // confCols[i].radius = confCols[i].radius || JSON.parse(JSON.stringify(this.defaultRadius));
+                            // confCols[i].shadow = confCols[i].shadow || JSON.parse(JSON.stringify(this.defaultShadow));
+                            cols.push(confCols[i]);
+                        } else {
+                            cols.push({
+                                align: '1',
+                                width: 100 / config.count,
+                                offset: 0,
+                                borders: JSON.parse(JSON.stringify(this.defaultBorders))
+                                // radius: JSON.parse(JSON.stringify(this.defaultRadius)),
+                                // shadow: JSON.parse(JSON.stringify(this.defaultShadow))
                             });
                         }
-                    } else {
-                        colData[i] = {
-                            wwObjects: [],
-                            background: wwLib.wwObject.getDefault({ type: 'ww-color' })
-                        };
                     }
+                    config[screen].cols = cols;
                 }
-                this.wwObject.content.data.columns = colData;
-
-                needUpdate = true;
             }
-
-            needUpdate && this.wwObjectCtrl.update(this.wwObject);
+            let colData = [];
+            this.wwObject.content.data.columns = this.wwObject.content.data.columns || [];
+            for (let i = 0; i < config.count; i++) {
+                if (this.wwObject.content.data.columns[i]) {
+                    colData[i] = this.wwObject.content.data.columns[i];
+                    if (!colData[i].background) {
+                        colData[i].background = wwLib.wwObject.getDefault({ type: 'ww-color' });
+                    }
+                } else {
+                    colData[i] = {
+                        wwObjects: [],
+                        background: wwLib.wwObject.getDefault({ type: 'ww-color' })
+                    };
+                }
+            }
+            this.wwObject.content.data.columns = colData;
+            this.wwObject.content.data.config = config || {};
+            this.wwObjectCtrl.update(this.wwObject);
         },
 
         getColData(index) {
@@ -295,6 +273,7 @@ export default {
             };
 
             return {
+                lala: true,
                 xs: getStyle('xs'),
                 sm: getStyle('sm'),
                 md: getStyle('md'),
