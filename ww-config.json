@@ -1,108 +1,18 @@
 {
-	"componentPath": "./src/wwObjectColumns.vue",
-	"content": {
-		"type": "ww-columns",
-		"data": {
-			"config": {
-				"count": 3,
-				"xs": {
-					"height": null,
-					"ignore": false,
-					"cols": [
-						{
-							"offset": 0,
-							"order": 0,
-							"width": 33.33,
-							"borders": []
-						},
-						{
-							"offset": 0,
-							"order": 1,
-							"width": 33.33,
-							"borders": []
-						},
-						{
-							"offset": 0,
-							"order": 3,
-							"width": 33.33,
-							"borders": []
-						}
-					]
-				},
-				"sm": null,
-				"md": null,
-				"lg": null
-			},
-			"columns": [
-				{
-					"background": "JSON.parse(JSON.stringify(background))",
-					"wwObjects": []
-				},
-				{
-					"background": "JSON.parse(JSON.stringify(background))",
-					"wwObjects": []
-				},
-				{
-					"background": "JSON.parse(JSON.stringify(background))",
-					"wwObjects": []
-				}
-			]
-		}
-	},
-	"upsales": {
-		"wwAnalytics": {
-			"click": false
-		}
-	},
-	"cmsOptions": {
-		"wwObjectHover": {
-			"pluses": false,
-			"hoverClass": "ww-columns-hover"
-		},
-		"wwObjectMenu": {
-			"items": [
-				{
-					"if": "wwLayout",
-					"name": "ADD_BEFORE",
-					"text": {
-						"en": "Before",
-						"fr": "Avant"
-					},
-					"icon": "wwi wwi-add",
-					"action": "wwLayout:addBefore"
-				},
-				{
-					"if": "wwLayout",
-					"name": "ADD_AFTER",
-					"text": {
-						"en": "After",
-						"fr": "Après"
-					},
-					"icon": "wwi wwi-add",
-					"action": "wwLayout:addAfter"
-				},
-
-				{
-					"name": "LAYOUT",
-					"text": {
-						"en": "Columns",
-						"fr": "Colonnes"
-					},
-					"icon": "wwi wwi-edit-margin",
-					"action": "editColumns"
-				},
-
-				{
-					"name": "OPTIONS",
-					"main": true,
-					"text": {
-						"en": "Options",
-						"fr": "Options"
-					},
-					"icon": "wwi wwi-edit-other",
-					"action": "edit"
-				}
-			]
-		}
-	}
+    "componentPath": "./src/wwObject.vue",
+    "editor": {
+        "label": {
+            "en": "Columns",
+            "fr": "Colonnes"
+        },
+        "editElementMenu": {
+            "items": [
+                {
+                    "name": "OPTIONS",
+                    "label": { "en": "Options", "fr": "Options" },
+                    "action": "edit"
+                }
+            ]
+        }
+    }
 }
