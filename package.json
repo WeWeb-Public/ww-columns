@@ -1,27 +1,27 @@
 {
-	"name": "ww-columns",
-	"type": "wwObject",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/WeWeb-Public/ww-columns"
-	},
-	"version": "3.0",
-	"license": "MIT",
-	"scripts": {
-		"build": "weweb-build",
-		"serve": "weweb-serve",
-		"create-config": "weweb-config"
-	},
-	"dependencies": {
-		"vue": "^2.6.12"
-	},
-	"devDependencies": {
-		"@vue/eslint-config-prettier": "^6.0.0",
-		"babel-eslint": "^10.1.0",
-		"eslint": "^7.10.0",
-		"eslint-plugin-prettier": "^3.1.4",
-		"eslint-plugin-vue": "^7.0.0",
-		"prettier": "^2.1.2",
-		"weweb-client": "latest"
-	}
+    "name": "ww-columns",
+    "type": "wwObject",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/WeWeb-Public/ww-columns"
+    },
+    "version": "1.0.0",
+    "license": "MIT",
+    "scripts": {
+        "build": "weweb-build",
+        "serve": "weweb-serve",
+        "create-config": "weweb-config"
+    },
+    "dependencies": {
+        "vue": "^2.6.12"
+    },
+    "devDependencies": {
+        "@vue/eslint-config-prettier": "^6.0.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.10.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-vue": "^7.0.0",
+        "prettier": "^2.1.2",
+        "weweb-client": "latest"
+    }
 }

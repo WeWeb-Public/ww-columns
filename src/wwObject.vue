@@ -190,8 +190,6 @@ export default {
 .ww-column .ww-column-container {
     width: 100%;
     position: relative;
-    /*overflow: hidden;*/
-    /*padding: 5px;*/
 }
 
 .ww-column .ww-column-bg {
