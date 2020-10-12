@@ -1,16 +1,15 @@
 {
     "name": "ww-columns",
-    "type": "wwObject",
     "repository": {
         "type": "git",
         "url": "https://github.com/WeWeb-Public/ww-columns"
     },
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "MIT",
     "scripts": {
-        "build": "weweb-build",
-        "serve": "weweb-serve",
-        "create-config": "weweb-config"
+        "build": "weweb build",
+        "serve": "weweb serve",
+        "create-config": "weweb config"
     },
     "dependencies": {
         "vue": "^2.6.12"
@@ -22,6 +21,6 @@
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-vue": "^7.0.0",
         "prettier": "^2.1.2",
-        "weweb-client": "latest"
+        "@weweb/cli": "latest"
     }
 }
